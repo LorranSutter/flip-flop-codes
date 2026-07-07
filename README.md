@@ -1,6 +1,6 @@
 # 🔀 Flip Flop Codes
 
-[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-16-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://flipflop.slome.org/)<!-- BADGE:END -->
+[![Dashboard](https://img.shields.io/badge/Dashboard-coding--challenges-blue?style=for-the-badge)](https://github.com/LorranSutter/coding-challenges) <!-- BADGE:START -->[![Solved Challenges](https://img.shields.io/badge/Solved%20Challenges-19-brightgreen?style=for-the-badge&logo=python&logoColor=white)](https://flipflop.slome.org/)<!-- BADGE:END -->
 
 This repository contains my solutions for [Flip Flop Codes](https://flipflop.slome.org/).
 
@@ -9,11 +9,15 @@ Flip Flop Codes is a coding puzzle series, with each puzzle split into three par
 <!-- SUMMARY:START -->
 ## 📊 Progress
 
-> **Overall: 16/21 parts solved (76%)**
+> **Overall: 19/57 parts solved (33%)**
 
 ### [2025](./2025/)
 
 `████████████████░░░░░` **16/21** parts solved (76%)
+
+### [2026](./2026/)
+
+`███░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░` **3/36** parts solved (8%)
 
 <!-- SUMMARY:END -->
 
