@@ -1,3 +1,4 @@
+import argparse
 import os
 import re
 from typing import List
@@ -56,6 +57,17 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @dataclass
 class Score:
     lower: bool
@@ -73,7 +85,7 @@ def part1(regex: bool = False):
     else:
         print("Loop version")
 
-    passwords = parse_file("input.txt")
+    passwords = parse_file()
 
     strongest_score = 0
     strongest_password = ""
@@ -97,7 +109,7 @@ def part2(regex: bool = False):
     else:
         print("Loop version")
 
-    passwords = parse_file("input.txt")
+    passwords = parse_file()
 
     strongest_score = 0
     strongest_password = ""
@@ -121,7 +133,7 @@ def part3(regex: bool = False):
     else:
         print("Loop version")
 
-    passwords = parse_file("input.txt")
+    passwords = parse_file()
     highest_strength = 0
 
     lowers = [chr(i) for i in range(97, 123)]
@@ -247,7 +259,8 @@ def password_stength_regex(password: str) -> int:
     return len(password) * score
 
 
-def parse_file(file_name: str) -> List[str]:
+def parse_file() -> List[str]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

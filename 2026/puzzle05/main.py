@@ -1,3 +1,4 @@
+import argparse
 import os
 import copy
 from typing import List, Tuple
@@ -38,9 +39,20 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    grid = parse_file("input.txt")
+    grid = parse_file()
 
     visited = drive(grid)
 
@@ -49,7 +61,7 @@ def part1():
 
 @timer
 def part2():
-    grid = parse_file("input.txt")
+    grid = parse_file()
 
     max_visited = 0
     for i in range(1, len(grid) - 1):
@@ -70,7 +82,7 @@ def part2():
 
 @timer
 def part3():
-    grid = parse_file("input.txt")
+    grid = parse_file()
 
     max_visited = 0
     for i in range(1, len(grid) - 1):
@@ -139,7 +151,8 @@ def turn(district: str, i: int, j: int) -> Tuple[int]:
     return i, j
 
 
-def parse_file(file_name: str) -> List[List[str]]:
+def parse_file() -> List[List[str]]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

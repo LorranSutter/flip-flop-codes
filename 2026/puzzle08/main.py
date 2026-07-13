@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import Dict, List
 
@@ -18,9 +19,20 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    lines = parse_file("input.txt")
+    lines = parse_file()
     rules = dict()
     for line in lines:
         if line[0] not in rules:
@@ -40,7 +52,7 @@ def part1():
 
 @timer
 def part2():
-    lines = parse_file("input_sample.txt")
+    lines = parse_file()
     rules = dict()
     reversed_rules = dict()
     for line in lines:
@@ -70,7 +82,7 @@ def part2():
 @timer
 def part3():
     # TODO: Implement part 3
-    lines = parse_file("input_sample.txt")
+    lines = parse_file()
     rules = dict()
     reversed_rules = dict()
     for line in lines:
@@ -99,7 +111,8 @@ def part3():
     print(f"Total stoats: {len(population)}")
 
 
-def parse_file(file_name: str) -> List[str]:
+def parse_file() -> List[str]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

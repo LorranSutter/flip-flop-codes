@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List
 
@@ -52,9 +53,20 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    blueprint = parse_file("input.txt")
+    blueprint = parse_file()
 
     highest_point, height = 0, 0
     for movement in blueprint:
@@ -73,7 +85,7 @@ def part1():
 
 @timer
 def part2():
-    blueprint = parse_file("input.txt")
+    blueprint = parse_file()
 
     highest_point, height, counter, sign = 0, 0, 0, 1
     for movement in blueprint:
@@ -99,7 +111,7 @@ def part2():
 
 @timer
 def part3():
-    blueprint = parse_file("input.txt")
+    blueprint = parse_file()
 
     highest_point, height, counter, sign = 0, 0, 0, 1
     for movement in blueprint:
@@ -134,7 +146,8 @@ def fib(n: int) -> int:
     return fibs[n-1]
 
 
-def parse_file(file_name: str) -> List[str]:
+def parse_file() -> List[str]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

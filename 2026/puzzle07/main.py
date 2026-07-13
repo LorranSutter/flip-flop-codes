@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List, Tuple
 
@@ -19,18 +20,30 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    test_data = False
-    movements, sushis = parse_file("input_sample.txt" if test_data else "input.txt")
+    movements, sushis = parse_file()
 
     sushis = iter(sushis)
+    sushi = next(sushis)
 
     head = (0, 0)
     eats = 0
     for movement in movements[: len(movements) // 2 + 1]:
-        if next(sushis, (-1, -1)) == head:
+        if head == sushi:
             eats += 1
+            sushi = next(sushis, (-1, -1))
         head = update_head(head, movement)
 
     print(f"Pieces of sushi eaten: {eats}")
@@ -38,8 +51,7 @@ def part1():
 
 @timer
 def part2():
-    test_data = False
-    movements, sushis = parse_file("input_sample.txt" if test_data else "input.txt")
+    movements, sushis = parse_file()
 
     sushis = iter(sushis)
     sushi = next(sushis)
@@ -63,8 +75,7 @@ def part2():
 
 @timer
 def part3():
-    test_data = False
-    movements, sushis = parse_file("input_sample.txt" if test_data else "input.txt")
+    movements, sushis = parse_file()
 
     sushis = iter(sushis)
     sushi = next(sushis)
@@ -73,7 +84,7 @@ def part3():
     snake = [head]
     eats_itself = 0
     for movement in movements:
-        # print_grid(10 if test_data else 30, head, snake, sushi)
+        # print_grid(10 if TEST_DATA else 30, head, snake, sushi)
         head = update_head(head, movement)
 
         if head == sushi:
@@ -130,7 +141,8 @@ def print_grid(
         print(row)
 
 
-def parse_file(file_name: str) -> Tuple[List[str], List[Tuple[int]]]:
+def parse_file() -> Tuple[List[str], List[Tuple[int]]]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

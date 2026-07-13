@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List
 
@@ -35,10 +36,25 @@ Obs:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    speeds = parse_file("input.txt")
-    size, frame, seconds = 1000, 500, 100
+    speeds = parse_file()
+    if TEST_DATA:
+        size, frame = 8, 4
+    else:
+        size, frame = 1000, 500
+    seconds = 100
     diff = (size - frame) // 2
     frame_boundaries = [diff, diff, diff + frame, diff + frame]
 
@@ -54,8 +70,12 @@ def part1():
 
 @timer
 def part2():
-    speeds = parse_file("input.txt")
-    size, frame, seconds = 1000, 500, 3600
+    speeds = parse_file()
+    if TEST_DATA:
+        size, frame = 8, 4
+    else:
+        size, frame = 1000, 500
+    seconds = 3600
     diff = (size - frame) // 2
     frame_boundaries = [diff, diff, diff + frame, diff + frame]
 
@@ -72,8 +92,12 @@ def part2():
 
 @timer
 def part3():
-    speeds = parse_file("input.txt")
-    size, frame, seconds = 1000, 500, 31556926
+    speeds = parse_file()
+    if TEST_DATA:
+        size, frame = 8, 4
+    else:
+        size, frame = 1000, 500
+    seconds = 31556926
     diff = (size - frame) // 2
     frame_boundaries = [diff, diff, diff + frame, diff + frame]
 
@@ -96,7 +120,8 @@ def within_frame(pos: List[int], frame_boundaries: List[int]) -> bool:
     return True
 
 
-def parse_file(file_name: str) -> List[List[int]]:
+def parse_file() -> List[List[int]]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 

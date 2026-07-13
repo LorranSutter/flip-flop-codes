@@ -84,6 +84,12 @@ python3 -m 2025.puzzle01.main
 
 Replace `2025` with the desired year and `puzzle01` with the specific puzzle you want to run.
 
+By default this runs against `input.txt`. Pass `--test` to run against `input_sample.txt` instead:
+
+```bash
+python3 -m 2025.puzzle01.main --test
+```
+
 ## 🔄 Updating Progress Summary
 
 To update the progress summary in this README after solving new parts, run the `generate_readme.py` script:

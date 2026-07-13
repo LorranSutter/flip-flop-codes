@@ -1,3 +1,4 @@
+import argparse
 import os
 from typing import List
 
@@ -46,10 +47,21 @@ Part 3:
 """
 
 
+def parse_args() -> bool:
+    parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
+    )
+    return parser.parse_args().test
+
+
+TEST_DATA = parse_args()
+
+
 @timer
 def part1():
-    stem = parse_file("input.txt")
-    cut = 400
+    stem = parse_file()
+    cut = 8 if TEST_DATA else 400
 
     total = 0
     for i in range(len(stem) - cut):
@@ -61,7 +73,7 @@ def part1():
 
 @timer
 def part2():
-    stem = parse_file("input.txt")
+    stem = parse_file()
 
     current_leaf = "o-|" if stem[-1] == "|-o" else "o-|"
 
@@ -76,7 +88,7 @@ def part2():
 
 @timer
 def part3():
-    stem = parse_file("input.txt")
+    stem = parse_file()
     leaves = len(stem) - stem.count("|")
 
     # +1 to count the first leaf
@@ -99,7 +111,8 @@ def part3():
     print(f"Total climbs: {climbs}")
 
 
-def parse_file(file_name: str) -> List[str]:
+def parse_file() -> List[str]:
+    file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
 
