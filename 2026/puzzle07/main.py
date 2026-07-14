@@ -1,22 +1,46 @@
 import argparse
 import os
-from typing import List, Tuple
+from typing import Iterator, List, Tuple
 
 from utils.timer import timer
 from utils.utils import tcolors
 
 """
 Preprocessing:
--
+- We read the input file and return two things: a list of characters representing the movements, and
+  an iterator that yields the position of each sushi in the order it will appear on the board.
 
 Part 1:
--
+- For this part we only care about how many pieces of sushi the snake eats, so there's no need to
+  track a body at all, just the head's position is enough.
+- We walk through the first half of the movements, since that's all this part asks for, updating the
+  head's position on every step. Whenever the head lands on the current sushi's coordinates, we count
+  it and pull the next sushi's coordinates off the iterator.
+- At the end we just report the total count of sushi eaten.
 
 Part 2:
--
+- This part is a natural extension of the first: we still track the head against the next sushi and
+  move it the same way, but now the snake has a body that has to follow along, just like classic Snake.
+- We keep an array storing the body's positions, ordered from head to tail. Every iteration we prepend
+  the head's position to that array, then move the head. If the new position isn't the sushi, we also
+  pop the tail off, so the snake only actually grows on the steps where it eats.
+- The snake dies the moment its head would land on a tile already in its own body, which is exactly
+  when we stop the loop. At the end we output the current size of the snake array (plus one, since we
+  break before appending the position that would have killed it).
 
 Part 3:
--
+- This last part is also a natural extension of the second: same head, sushi, and growth handling, but
+  the snake no longer dies on a self-collision, it eats through itself instead.
+- When the head would land on a body tile, we look up that tile's index in the array and slice the
+  array down to just before it, so the collided segment and everything behind it disappears. The head
+  then moves onto that now-empty tile as normal, and we bump a counter tracking how many times this
+  happened.
+- At the end we report the final snake length multiplied by the number of times it ate itself.
+
+Obs: One interesting thing is that, initially we see the problem to be modeled as a matrix, but
+     we don't have to worry about the size of the grid or building a matrix for this problem.
+     Just the snake and sushi positioning are enough, since the boundaries of the grid are
+     irrelevant.
 """
 
 
@@ -35,9 +59,7 @@ TEST_DATA = parse_args()
 def part1():
     movements, sushis = parse_file()
 
-    sushis = iter(sushis)
     sushi = next(sushis)
-
     head = (0, 0)
     eats = 0
     for movement in movements[: len(movements) // 2 + 1]:
@@ -53,9 +75,7 @@ def part1():
 def part2():
     movements, sushis = parse_file()
 
-    sushis = iter(sushis)
     sushi = next(sushis)
-
     head = (0, 0)
     snake = []
     for movement in movements:
@@ -70,6 +90,7 @@ def part2():
         else:
             snake.pop()
 
+    # +1 bc we break the loop before appending the last position
     print(f"Snake size: {len(snake)+1}")
 
 
@@ -77,9 +98,7 @@ def part2():
 def part3():
     movements, sushis = parse_file()
 
-    sushis = iter(sushis)
     sushi = next(sushis)
-
     head = (0, 0)
     snake = [head]
     eats_itself = 0
@@ -141,7 +160,7 @@ def print_grid(
         print(row)
 
 
-def parse_file() -> Tuple[List[str], List[Tuple[int]]]:
+def parse_file() -> Tuple[List[str], Iterator[Tuple[int]]]:
     file_name = "input_sample.txt" if TEST_DATA else "input.txt"
     script_dir = os.path.dirname(__file__)
     abs_file_path = os.path.join(script_dir, file_name)
@@ -153,7 +172,7 @@ def parse_file() -> Tuple[List[str], List[Tuple[int]]]:
         f.readline()  # blank line
         for line in f:
             sushis.append(tuple(map(int, line.strip().split(","))))
-    return movements, sushis
+    return movements, iter(sushis)
 
 
 part1()
