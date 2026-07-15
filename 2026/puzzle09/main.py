@@ -37,7 +37,6 @@ TEST_DATA = parse_args()
 
 @timer
 def part1():
-    # TODO: Implement part 1
     grid, start, end = parse_file()
 
     d = dijkstra(grid, start, end)
@@ -47,7 +46,6 @@ def part1():
 
 @timer
 def part2():
-    # TODO: Implement part 2
     grid, start, end = parse_file()
     d, path = dijkstra_with_teleport(grid, start, end)
 
