@@ -1,7 +1,7 @@
 # 2026
 
 <!-- SUMMARY:START -->
-`████████████████████████████░░░░░░░░` **28/36** parts solved (78%)
+`█████████████████████████████░░░░░░░` **29/36** parts solved (81%)
 
 | Puzzle | Part 1 | Part 2 | Part 3 |
 |:-------|:------:|:------:|:------:|
@@ -10,7 +10,7 @@
 | [Puzzle 03](./puzzle03/) | ⭐ | ⭐ | ⭐ |
 | [Puzzle 04](./puzzle04/) | ⭐ | ⭐ | ⭐ |
 | [Puzzle 05](./puzzle05/) | ⭐ | ⭐ | ⭐ |
-| [Puzzle 06](./puzzle06/) | ⭐ | ⭐ | ⬚ |
+| [Puzzle 06](./puzzle06/) | ⭐ | ⭐ | ⭐ |
 | [Puzzle 07](./puzzle07/) | ⭐ | ⭐ | ⭐ |
 | [Puzzle 08](./puzzle08/) | ⭐ | ⭐ | ⬚ |
 | [Puzzle 09](./puzzle09/) | ⭐ | ⭐ | ⬚ |
