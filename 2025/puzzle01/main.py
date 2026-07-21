@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import List
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -24,14 +24,6 @@ Part 3:
 - Same process as parts 1 and 2, but we also skip any string that contains the letter 'e' - it doesn't
   contribute to the total at all.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

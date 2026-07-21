@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import Iterator, List, Tuple
 
+from utils.args import parse_args
 from utils.timer import timer
 from utils.utils import tcolors
 
@@ -42,14 +42,6 @@ Obs: One interesting thing is that, initially we see the problem to be modeled a
      Just the snake and sushi positioning are enough, since the boundaries of the grid are
      irrelevant.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

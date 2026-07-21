@@ -1,9 +1,9 @@
-import argparse
 import os
 import re
 from typing import List
 from dataclasses import dataclass
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -55,14 +55,6 @@ Part 3:
 - This part is straightforwardly brute force: 62 candidates times the whole password list, but
   the scoring itself is still a single pass per password, so it stays cheap.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

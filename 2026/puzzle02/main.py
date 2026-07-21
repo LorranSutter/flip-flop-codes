@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import List
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -46,14 +46,6 @@ Part 3:
 - From there it's identical to part 1: bump `temps[index_temp]` and track the highest
   temperature with the same lowest-index tie-break.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

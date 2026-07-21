@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import List
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -45,14 +45,6 @@ Part 3:
   counter starts at 1 instead of 0.
 - Just output the total count at the end.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

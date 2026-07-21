@@ -1,4 +1,3 @@
-import argparse
 import os
 import sys
 import time
@@ -6,6 +5,7 @@ import math
 import heapq
 from typing import Tuple, List
 
+from utils.args import parse_args
 from utils.timer import timer
 from utils.utils import tcolors
 
@@ -22,14 +22,6 @@ Part 2:
 Part 3:
 -
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import List
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -23,14 +23,6 @@ Part 3:
 - We iterate over both lists simultaneously. For current temperatures below target we add the
   difference; for the ones above we add the difference times 5.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()

@@ -1,7 +1,7 @@
-import argparse
 import os
 from typing import List
 
+from utils.args import parse_args
 from utils.timer import timer
 
 """
@@ -51,14 +51,6 @@ Part 3:
     - The remaining six 'v' just keep extending the down-run without ever triggering another jump, so the
       final answer is 4.
 """
-
-
-def parse_args() -> bool:
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--test", action="store_true", help="use input_sample.txt instead of input.txt"
-    )
-    return parser.parse_args().test
 
 
 TEST_DATA = parse_args()
